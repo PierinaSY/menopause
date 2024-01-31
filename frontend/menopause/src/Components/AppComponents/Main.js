@@ -8,11 +8,8 @@ import AssistantIcon from "@mui/icons-material/Assistant";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import { Link } from "react-router-dom";
 
-
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-
-
 
 
 export default function Main(props) {

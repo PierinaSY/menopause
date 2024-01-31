@@ -10,6 +10,20 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import axios from "axios";
 
+const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
+const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
+
+// const axiosConfig = {
+//   headers: {
+//     'X-CSRFToken': csrfToken,
+//   },
+// };
+
+const axiosInstance = axios.create({
+  headers: {
+    'X-CSRFToken': csrfToken,
+  },
+});
 
 const userData = JSON.parse(sessionStorage.getItem('user'));
 
@@ -32,9 +46,12 @@ export default function Add(props) {
     const fetchData = async () => {
       try {
         const [symptomsResponse, severityResponse, moodResponse] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/api/get_symptoms/"),
-          axios.get("http://127.0.0.1:8000/api/get_severity_levels/"),
-          axios.get("http://127.0.0.1:8000/api/get_mood_levels/"),
+          // axios.get("http://127.0.0.1:8000/api/get_symptoms/"),
+          // axios.get("http://127.0.0.1:8000/api/get_severity_levels/"),
+          // axios.get("http://127.0.0.1:8000/api/get_mood_levels/"),
+          axiosInstance.get("http://127.0.0.1:8000/api/get_symptoms/"),
+          axiosInstance.get("http://127.0.0.1:8000/api/get_severity_levels/"),
+          axiosInstance.get("http://127.0.0.1:8000/api/get_mood_levels/"),
         ]);
 
         setSymptoms(symptomsResponse.data);
@@ -66,7 +83,7 @@ export default function Add(props) {
 
     try {
       // Send data to Django backend to create a new record in Track_Symptom model
-      await axios.post("http://127.0.0.1:8000/api/track_symptom/d48b9a8d-6902-47af-88f7-7562eab0a3fb", {
+      await axiosInstance.post("http://127.0.0.1:8000/api/track_symptom/9b460cc9-5f4e-443f-b104-122e38fad798", {
         user_id: props.user_id,
         ...formData,
         date: formattedDate,
