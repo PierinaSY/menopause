@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'meno_auth.apps.MenoAuthConfig',
+    'meno_tracker'
 ]
 
 MIDDLEWARE = [

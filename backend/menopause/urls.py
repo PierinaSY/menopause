@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('meno_auth.urls')),
+    path("", include("meno_tracker.urls")),
 ]

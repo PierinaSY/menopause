@@ -33,6 +33,16 @@ class UserLogin(APIView):
 		if serializer.is_valid(raise_exception=True):
 			user = serializer.check_user(data)
 			login(request, user)
+			# user_data = {
+            #     'id': user.id,
+            #     'username': user.username,
+            #     'email': user.email,
+            #     'first_name': user.first_name,
+            #     'last_name': user.last_name,
+            #     # Include other user attributes as needed
+            # }
+            # request.session['user_data'] = user_data
+            # return JsonResponse({'message': 'Login successful', 'user_data': user_data})
 			return Response(serializer.data, status=status.HTTP_200_OK)
 
 
