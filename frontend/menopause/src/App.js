@@ -11,6 +11,11 @@ import Home from './Components/Home/Home';
 import Signin from './Components/Signin/Signin';
 import Meno from './Components/Meno/Meno';
 import Signup from './Components/Signup/Signup';
+import Track from './Components/Track-Symptoms/Track';
+import Recommendations from './Components/Recommendation/Recommendations';
+import Patterns from './Components/Patterns/Patterns';
+
+
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -29,9 +34,9 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/meno" element={<Meno />} />
-                {/* <Route path="/track" element={<Track />} />
+                <Route path="/track" element={<Track />} />
                 <Route path="/recommendations" element={<Recommendations />} />
-                <Route path="/patterns" element={<Patterns />} /> */}
+                <Route path="/patterns" element={<Patterns />} />
               </Routes>
             </div>
           </Router>
