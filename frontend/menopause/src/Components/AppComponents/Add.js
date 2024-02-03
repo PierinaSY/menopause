@@ -68,6 +68,7 @@ export default function Add(props) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
   };
 
   const handleDateChange = (date) => {
@@ -143,6 +144,7 @@ export default function Add(props) {
               }}
               value={formData.symptom_id}
               onChange={handleInputChange}
+              required
             >
               {symptoms.map((option) => (
                 <option key={option.id} value={option.id}>
