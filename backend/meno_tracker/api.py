@@ -10,7 +10,6 @@ from rest_framework import mixins
 
 from django.contrib.auth import get_user_model
 
-# from django.contrib.auth.models import User
 from .models import *
 from .serializers import *
 
@@ -19,6 +18,8 @@ from rest_framework.views import APIView
 
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
+
+from django.db.models import Count, Func, F, Value, DateField
 
 
 class UserList(generics.ListAPIView):
@@ -173,8 +174,39 @@ class RecordedSymptomsAPIView(APIView):
 
         print("Query Result:", data)
 
-        # serializer = Track_SymptomSerializer(data, many=True)  
-        # print("Serialized Data:", serializer.data)
-
         return Response(data)
+    
 
+# class TruncDate(Func):
+#     function = 'DATE_TRUNC'
+#     template = '%(function)s(\'day\', %(expressions)s)'
+#     output_field = models.DateTimeField()
+
+class CountByDateAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user_id = self.request.user.id
+        data = (
+            Track_Symptom.objects
+            .filter(user_id=user_id)
+            .values('date')
+            .annotate(symptom_count=Count('symptom_id', distinct=True))
+        )
+        serializer = CountBySymptomsSerializer(data, many=True)
+        return Response(serializer.data)
+
+class CountBySymptomsAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user_id = self.request.user.id
+        data = (
+            Track_Symptom.objects
+            .filter(user_id=user_id)
+            .values('symptom_id__name')
+            .annotate(symptom_count=Count('symptom_id'))
+        )
+        return Response(data)

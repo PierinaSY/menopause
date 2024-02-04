@@ -62,7 +62,7 @@ function ResponsiveAppNavbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#474973'}}>
+    <AppBar sx={{ backgroundColor: '#474973'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1 }}>         

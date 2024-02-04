@@ -4,7 +4,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';  
 import MetricTable from './MetricTable.js';
+import BarChart from './MetricBar.js';
+import DoughnutChart from './MetricDonut.js';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -21,8 +24,11 @@ const axiosConfig = {
 export default function Metrics(props) {
 
   const [tableData, setTableData] = useState({});
+  const [barData, setBarData] = useState([]);
+  const [donutData, setDonutData] = useState([]);
 
-  const columm_name = ['id', 'duration', 'date', 'notes', 'symptom_id__id', 'symptom_id__name'];
+  const columm_name = ['date', 'symptom_id__name', 'duration', 'notes'];
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,9 +36,22 @@ export default function Metrics(props) {
         const response = await axios.get('http://127.0.0.1:8000/api/recorded_symptoms/', {
           params: { user_id: props.userData.user_data.id },
         }, axiosConfig);
+
+        const barResponse = await axios.get('http://127.0.0.1:8000/api/count_symptoms_date/', {
+           params: { user_id: props.userData.user_data.id },
+        }, axiosConfig);
+
+        const donutResponse = await axios.get('http://127.0.0.1:8000/api/count_symptoms/', {
+           params: { user_id: props.userData.user_data.id },
+        }, axiosConfig);
         
+        setBarData(barResponse.data);
         setTableData(response.data);
+        setDonutData(donutResponse.data);
         console.log('This is the data', response.data);
+        console.log('This is the data', barResponse.data);
+        console.log('This is the data', donutResponse.data);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -41,9 +60,6 @@ export default function Metrics(props) {
     fetchData();
   }, [props.userData.user_data.id]);
 
-
-
-
   return (
     <Box
       sx={{
@@ -51,21 +67,29 @@ export default function Metrics(props) {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        minHeight: '100vh', // Change from height to minHeight
         gap: '1rem',
+        padding: '20px', // Add padding to create space around the content
       }}
     >
-        <Typography variant="h4" gutterBottom>
-          Lets see some reports
-        </Typography>
-        <Stack spacing={2} sx={{ width: '100%', textAlign: 'center' }}>
-        <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '50ch' },}}
-          noValidate autoComplete="off">
-          </Box>
-          <MetricTable columns = {columm_name} data={tableData} />             
-          </Stack>
-      </Box>
-      );
+      <Typography variant="h4" gutterBottom>
+        Let's see some reports
+      </Typography>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item container spacing={2} justifyContent="center">
+          <Grid item xs={12} md={6}>
+            <BarChart data={barData} />
+            <BarChart data={barData} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <DoughnutChart data={donutData} />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} justifyContent="center" container spacing={2} marginTop={4}>
+          <Typography variant='h6'>Review all the symptoms you have registered</Typography>
+          <MetricTable columns={columm_name} data={tableData}/>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 }
-
-    

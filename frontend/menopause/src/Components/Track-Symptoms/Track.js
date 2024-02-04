@@ -23,13 +23,13 @@ function Track() {
     const email = location.state ? location.state.email: null;
 
   return (
-    <div className="home">
-      <ResponsiveAppNavbar />
-      <div style={{ display: "flex", justifyContent: "center", marginLeft: 100 }}>
-        <Main style={{ flex: 1 }} name= {userData.user_data.first_name} />
-        <Add style={{ flex: 1 }} user_id= {userData.user_data.id} />
-      </div>
-      <AppFooter />
+    <div style={{ position: 'relative', minHeight: '100vh', padding: '64px 0' }}>
+        <ResponsiveAppNavbar style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }} />
+        <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Main style={{ flex: 1 }} name= {userData.user_data.first_name} />
+          <Add style={{ flex: 1 }} user_id= {userData.user_data.id} />
+        </div>
+        <AppFooter/>
     </div>
   );
 }

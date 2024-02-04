@@ -3,6 +3,8 @@ from rest_framework.serializers import SerializerMethodField
 from .models import *
 
 from django.contrib.auth import get_user_model, authenticate
+from django.utils import timezone
+
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -97,4 +99,17 @@ class ReportSerializer(serializers.ModelSerializer):
 
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
+# class CountBySymptomsSerializer(serializers.Serializer):
+#     # date = serializers.DateField()
+#     truncated_date = serializers.DateField()
 
+#     symptom_count = serializers.IntegerField()
+class CountBySymptomsSerializer(serializers.Serializer):
+    date = serializers.DateField()  # Assuming 'date' is already a datetime.date field
+    symptom_count = serializers.IntegerField()
+
+    def to_representation(self, instance):
+        return {
+            'date': instance['date'],
+            'symptom_count': instance['symptom_count'],
+        }

@@ -43,6 +43,9 @@ class Symptom_Treatment(models.Model):
     symptom_id = models.ForeignKey(Symptom, on_delete=models.CASCADE)
     treatment_id = models.ForeignKey(Treatment, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.symptom_id.name + " - " + self.treatment_id.name
+
 class Track_Symptom(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -70,6 +73,9 @@ class Track_Symptom(models.Model):
     duration = models.IntegerField()
     date = models.DateField(default=datetime.now)
     notes = models.TextField()
+
+    def __str__(self):
+        return self.user_id.first_name + " - " + self.symptom_id.name
 
 class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

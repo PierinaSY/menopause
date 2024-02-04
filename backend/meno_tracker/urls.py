@@ -13,8 +13,11 @@ urlpatterns = [
     path("api/symptom_treatment/<str:id>", api.Symptom_TreatmentDetails.as_view()),
     path("api/symptom_treatments", api.Symptom_TreatmentList.as_view()),
     path("api/reports", api.ReportList.as_view()),
-    path('api/recorded_symptoms/', api.RecordedSymptomsAPIView.as_view(), name='recorded_symptoms'),
     path('api/get_symptoms/', api.GetSymptoms.as_view(), name='get_symptoms'),
     path('api/get_severity_levels/', api.GetSeverityLevels.as_view(), name='get_severity_levels'),
     path('api/get_mood_levels/', api.GetMoodLevels.as_view(), name='get_mood_levels'),
+    path('api/recorded_symptoms/', api.RecordedSymptomsAPIView.as_view(), name='recorded_symptoms'),
+    path('api/count_symptoms_date/', api.CountByDateAPIView.as_view(), name='count_symptoms_date'),
+    path('api/count_symptoms/', api.CountBySymptomsAPIView.as_view(), name='count_symptoms'),
+
 ]

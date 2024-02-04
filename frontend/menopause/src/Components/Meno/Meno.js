@@ -26,16 +26,10 @@ function Meno(props){
 
     console.log('Userdata for you: ', userData);
 
-    // if (!email) {
-    //     return <div>User data not found.</div>;
-    // }
-
-    // navigate({ state: { email } });
-
     return(
         <div>
             <ResponsiveAppNavbar/>
-            <Main name= {userData.email} />
+            <Main name= {userData.user_data.first_name} />
             <AppFooter/>
         </div>
     );
