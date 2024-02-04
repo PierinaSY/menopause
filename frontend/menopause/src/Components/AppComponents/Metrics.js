@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import MetricTable from './MetricTable.js';
 import BarChart from './MetricBar.js';
 import DoughnutChart from './MetricDonut.js';
+import BarChart2 from './MetricBar2.js';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -26,6 +27,8 @@ export default function Metrics(props) {
   const [tableData, setTableData] = useState({});
   const [barData, setBarData] = useState([]);
   const [donutData, setDonutData] = useState([]);
+  const [bar2Data, setBar2Data] = useState([]);
+
 
   const columm_name = ['date', 'symptom_id__name', 'duration', 'notes'];
 
@@ -44,10 +47,16 @@ export default function Metrics(props) {
         const donutResponse = await axios.get('http://127.0.0.1:8000/api/count_symptoms/', {
            params: { user_id: props.userData.user_data.id },
         }, axiosConfig);
+
+        const bar2Response = await axios.get('http://127.0.0.1:8000/api/mood_date/', {
+           params: { user_id: props.userData.user_data.id },
+        }, axiosConfig);
         
         setBarData(barResponse.data);
         setTableData(response.data);
         setDonutData(donutResponse.data);
+        setBar2Data(bar2Response.data);
+
         console.log('This is the data', response.data);
         console.log('This is the data', barResponse.data);
         console.log('This is the data', donutResponse.data);
@@ -79,7 +88,7 @@ export default function Metrics(props) {
         <Grid item container spacing={2} justifyContent="center">
           <Grid item xs={12} md={6}>
             <BarChart data={barData} />
-            <BarChart data={barData} />
+            <BarChart2 data={bar2Data} />
           </Grid>
           <Grid item xs={12} md={6}>
             <DoughnutChart data={donutData} />

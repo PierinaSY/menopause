@@ -167,15 +167,8 @@ class RecordedSymptomsAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         user_id = self.request.user.id
-        print("User ID:", user_id)
-
         data = Track_Symptom.objects.filter(user_id=user_id).select_related('symptom_id').values('id', 'duration', 'date', 'notes', 'symptom_id__id', 'symptom_id__name')
-        # data = Track_Symptom.objects.filter(user_id=user_id).values('id', 'duration', 'date', 'notes', 'symptom_id')
-
-        print("Query Result:", data)
-
         return Response(data)
-    
 
 # class TruncDate(Func):
 #     function = 'DATE_TRUNC'
@@ -208,5 +201,19 @@ class CountBySymptomsAPIView(APIView):
             .filter(user_id=user_id)
             .values('symptom_id__name')
             .annotate(symptom_count=Count('symptom_id'))
+        )
+        return Response(data)
+
+class MoodByDateAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user_id = self.request.user.id
+        data = (
+            Track_Symptom.objects
+            .filter(user_id=user_id)
+            .values('date', 'mood')
+            .annotate(mood_count=Count('mood', distinct=True))
         )
         return Response(data)

@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 // Function to generate random rgba color
 const getRandomColor = () => {
     const randomColor = () => Math.floor(Math.random() * 256);
-    return `rgba(${randomColor()}, ${randomColor()}, ${randomColor()}, 0.5)`;
+    return `rgba(${randomColor()}, ${randomColor()}, ${randomColor()}, 0.43)`;
 };
 
 export function DoughnutChart({ data }) {

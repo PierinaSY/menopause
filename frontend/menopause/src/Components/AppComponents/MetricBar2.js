@@ -13,7 +13,7 @@ ChartJS.register(
 );
 
 
-export function BarChart({ data }) {
+export function BarChart2({ data }) {
     const options = {
         responsive: true,
         plugins: {
@@ -22,7 +22,7 @@ export function BarChart({ data }) {
           },
           title: {
             display: true,
-            text: 'Symptom by Date',
+            text: 'Mood by Date',
           },
         },
     };
@@ -33,17 +33,17 @@ export function BarChart({ data }) {
         labels,
         datasets: [
             {
-              label: 'Symptom Count',
-              backgroundColor: 'rgba(75,192,192,0.2)',
-              borderColor: 'rgba(75,192,192,1)',
+              label: 'Mood',
+              backgroundColor: 'rgba(235,239,191, 0.6)',
+              borderColor: 'rgba(217,227,112,1)',
               borderWidth: 1,
-              hoverBackgroundColor: 'rgba(75,192,192,0.4)',
-              hoverBorderColor: 'rgba(75,192,192,1)',
-              data: data.map((item) => item.symptom_count),
+              hoverBackgroundColor: 'rgba(235,239,191,1)',
+              hoverBorderColor: 'rgba(217,227,112,1)',
+              data: data.map((item) => item.mood),
             },
         ],
       };
 
   return <Bar options={options} data={chartData} />;
 }
-export default BarChart;
+export default BarChart2;
