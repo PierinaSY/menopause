@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box } from '@mui/material';
 
-export default function Treatment() {
+export default function Treatment({ data }) {
   return (
     <div>
-        <Box
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -19,42 +19,37 @@ export default function Treatment() {
           gap: '1rem',
         }}
       >
-        <Typography variant="h2" gutterBottom>
-            Here are our top suggestions
-          </Typography>
-          <Typography variant="h4" gutterBottom>
-            What are you feeling today? 
+        <Typography variant="h4" gutterBottom>
+          Here are our top suggestions
         </Typography>
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+
+        {data.symptom_treatments ? (
+          data.symptom_treatments.map((item, index) => (
+            <Accordion key={index}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index + 1}-content`}
+                id={`panel${index + 1}-header`}
+              >
+                <Typography>{item.symptom.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {item.treatments.map((treatment, subIndex) => (
+                    <div key={subIndex}>
+                      <Typography variant="subtitle1" gutterBottom>{treatment.name}</Typography>
+                      <Typography variant="body2" gutterBottom>{treatment.description}</Typography>
+                    </div>
+                  ))}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))
+        ) : (
+          <Typography variant="body1">
+            No symptom treatments found.
           </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+        )}
       </Box>
     </div>
   );

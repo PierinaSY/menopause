@@ -113,3 +113,31 @@ class CountBySymptomsSerializer(serializers.Serializer):
             'date': instance['date'],
             'symptom_count': instance['symptom_count'],
         }
+    
+# class Track_Symptom_TreatmentSerializer(serializers.Serializer):
+#     track_symptom = Track_SymptomSerializer()
+#     symptom_treatment = serializers.SerializerMethodField()
+
+#     def get_symptom_treatment(self, obj):
+#         # Fetch Symptom_Treatment data related to the Track_Symptom instance
+#         symptom_treatment_data = Symptom_Treatment.objects.filter(symptom_id=obj.track_symptom.symptom.id)
+        
+#         # Serialize the data
+#         serializer = Symptom_TreatmentSerializer(symptom_treatment_data, many=True)
+#         return serializer.data
+
+class Track_Symptom_TreatmentSerializer(serializers.Serializer):
+    track_symptom = Track_SymptomSerializer()
+    symptom_treatment = Symptom_TreatmentSerializer()
+
+    def to_representation(self, instance):
+        track_symptom_data = instance
+        symptom_treatment_data = instance.symptom_treatment
+
+        joined_data = {
+            'track_symptom': Track_SymptomSerializer(track_symptom_data).data,
+            'symptom_treatment_data': Symptom_TreatmentSerializer(symptom_treatment_data).data,
+        }
+
+        return joined_data
+

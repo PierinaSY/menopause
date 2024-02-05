@@ -20,4 +20,5 @@ urlpatterns = [
     path('api/count_symptoms_date/', api.CountByDateAPIView.as_view(), name='count_symptoms_date'),
     path('api/count_symptoms/', api.CountBySymptomsAPIView.as_view(), name='count_symptoms'),
     path('api/mood_date/', api.MoodByDateAPIView.as_view(), name='mood_date'),
+    path('api/recommendations/', api.RecommendationsAPIView.as_view(), name='recommendations')
 ]
