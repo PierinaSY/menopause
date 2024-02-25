@@ -4,6 +4,9 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import { IntlProvider } from 'react-intl';
+import localeData from './locales'; 
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -15,15 +18,15 @@ import Track from './Components/Track-Symptoms/Track';
 import Recommendations from './Components/Recommendation/Recommendations';
 import Patterns from './Components/Patterns/Patterns';
 
-
-
-
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
+
+
 function App() {
   return (
+    <IntlProvider locale="es" messages={localeData.es}>
     <div>
       <main>
       <Router>
@@ -42,6 +45,7 @@ function App() {
           </Router>
       </main>
     </div>
+  </IntlProvider>
   );
 }
 

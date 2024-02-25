@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -36,10 +38,11 @@ export default function Quote() {
             </Box>
             <Box sx={{ px: 20}}>
                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                "Using this app has been a game-changer for me during my menopause journey. 
-                The ability to track my symptoms, receive tailored recommendations, and visualize 
-                trends has empowered me to better manage this phase of life. I highly recommend it 
-                to every woman navigating menopause—it's a must-have companion!"
+                  <FormattedMessage id="home.quote" 
+                  defaultMessage="Using this app has been a game-changer for me during my menopause journey. 
+                  The ability to track my symptoms, receive tailored recommendations, and visualize 
+                  trends has empowered me to better manage this phase of life. I highly recommend it 
+                  to every woman navigating menopause—it's a must-have companion!" />
                 </Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>

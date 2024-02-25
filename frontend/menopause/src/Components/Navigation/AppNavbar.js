@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,7 +21,12 @@ import axios from 'axios';
 
 const userData = JSON.parse(sessionStorage.getItem('user'));
 
-const settings = ['Profile', 'Dashboard', 'Reports', 'Sign out'];
+const settings = [
+                  <FormattedMessage id="navApp.item1" defaultMessage="Profile" />, 
+                  <FormattedMessage id="navApp.item2" defaultMessage="Dashboard" />, 
+                  <FormattedMessage id="navApp.item3" defaultMessage="Reports" />,
+                  <FormattedMessage id="navApp.item4" defaultMessage="Sign out" />
+                ];
 
 function ResponsiveAppNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -73,7 +80,8 @@ function ResponsiveAppNavbar() {
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button variant="contained" sx={{ mr: 2 }}
-            component={Link} to="/track">Add Symptom</Button>
+            component={Link} to="/track">
+              <FormattedMessage id="navApp.add" defaultMessage="Add Symptom" /></Button>
             <span></span>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -96,10 +104,10 @@ function ResponsiveAppNavbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting === 'Sign out' ? handleSignOut : handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+              {settings.map((setting, index) => (
+                <MenuItem key={index} onClick={() => (setting.props.id === 'navApp.item4' ? handleSignOut() : handleCloseUserMenu())}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
               ))}
             </Menu>
           </Box>

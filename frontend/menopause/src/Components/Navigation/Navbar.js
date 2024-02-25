@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +16,11 @@ import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+                <FormattedMessage id="nav.item1" defaultMessage="Product" />, 
+                <FormattedMessage id="nav.item2" defaultMessage="Pricing" />, 
+                <FormattedMessage id="nav.item3" defaultMessage="Blog" />
+              ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -85,10 +90,14 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0, py: 5, }}>
             <Button variant="contained" sx={{ mr: 2 }}
-            component={Link} to="/signin">Login</Button>
+            component={Link} to="/signin">
+              <FormattedMessage id="nav.loginButton" defaultMessage="Login" />
+            </Button>
             <span></span>
             <Button variant="outlined"
-            component={Link} to="/signup">Sign up</Button>
+            component={Link} to="/signup">
+              <FormattedMessage id="nav.signupButton" defaultMessage="Sign up" />
+            </Button>
             
           </Box>
         </Toolbar>

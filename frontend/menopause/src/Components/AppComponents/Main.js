@@ -1,4 +1,6 @@
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -25,10 +27,11 @@ export default function Main(props) {
       }}
     >
       <Typography variant="h2" gutterBottom>
-        Welcome {props.name}!
+        <FormattedMessage id="main.welcome" defaultMessage="Welcome " />
+         {props.name}!
       </Typography>
       <Typography variant="h4" gutterBottom>
-        Let’s get started
+        <FormattedMessage id="main.title" defaultMessage="Let’s get started" />
       </Typography>
       <Stack spacing={2} sx={{ width: "100%", textAlign: "center" }}>
         <Button
@@ -37,7 +40,7 @@ export default function Main(props) {
           component={Link}
           to="/track"
         >
-          Record your symptoms
+          <FormattedMessage id="main.button0" defaultMessage="Record your symptoms" />
         </Button>
         <Button
           variant="contained"
@@ -45,7 +48,7 @@ export default function Main(props) {
           component={Link}
           to="/recommendations"
         >
-          Get recommendations
+          <FormattedMessage id="main.button1" defaultMessage="Get recommendations" />
         </Button>
         <Button
           variant="contained"
@@ -53,7 +56,7 @@ export default function Main(props) {
           component={Link}
           to="/patterns"
         >
-          See patterns on your journey
+          <FormattedMessage id="main.button2" defaultMessage="See patterns on your journey" />
         </Button>
       </Stack>
     </Box>

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/material';
@@ -33,50 +35,58 @@ export default function Features() {
             }}>
                 <Item>
                     <Typography variant="h5" gutterBottom>
-                        Symptom Recording
+                        <FormattedMessage id="home.features.item1Title" defaultMessage="Symptom Recording" />
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
-                        Capturing Your Journey, Detail by Detail
+                        <FormattedMessage id="home.features.item1Subtitle" 
+                        defaultMessage="Capturing Your Journey, Detail by Detail" />
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        Document and analyze symptoms, noting nuances like 
-                        severity and impact for a comprehensive health overview.
+                        <FormattedMessage id="home.features.item1Description" 
+                        defaultMessage="Document and analyze symptoms, noting nuances like 
+                        severity and impact for a comprehensive health overview." />   
                     </Typography>
                 </Item>
                 <Item>
                     <Typography variant="h5" gutterBottom>
-                        Recommendations Engine 
+                        <FormattedMessage id="home.features.item2Title" defaultMessage="Recommendations Engine" />
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
-                        Tailored Guidance for Your Journey
+                        <FormattedMessage id="home.features.item2Subtitle" 
+                        defaultMessage="Tailored Guidance for Your Journey" />
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        Personalized suggestions to navigate menopause 
-                        symptoms, supporting your unique experience.
+                        <FormattedMessage id="home.features.item2Description" 
+                        defaultMessage="Personalized suggestions to navigate menopause 
+                        symptoms, supporting your unique experience." />
                     </Typography>
                 </Item>
                 <Item>
                     <Typography variant="h5" gutterBottom>
-                        Pattern Identification 
+                        <FormattedMessage id="home.features.item3Title" defaultMessage="Pattern Identification " />
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
-                        Insightful Trends at Your Fingertips
+                        <FormattedMessage id="home.features.item3Subtitle" 
+                        defaultMessage="Insightful Trends at Your Fingertips" />
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        Identify and understand recurring patterns 
-                        in your symptoms, empowering proactive management.
+                        <FormattedMessage id="home.features.item3Description" 
+                        defaultMessage="Identify and understand recurring patterns 
+                        in your symptoms, empowering proactive management." />
                     </Typography>
                 </Item>
                 <Item>
                     <Typography variant="h5" gutterBottom>
-                        Daily Reminders  
+                        <FormattedMessage id="home.features.item4Title" defaultMessage="Daily Reminders" />
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
-                        Stay On Track, Every Day
+                        <FormattedMessage id="home.features.item4Subtitle" 
+                        defaultMessage="Stay On Track, Every Day" />
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                    Set reminders for consistent symptom tracking, 
-                    ensuring a comprehensive record for better analysis and management.
+                        <FormattedMessage id="home.features.item4Description" 
+                        defaultMessage="Set reminders for consistent symptom tracking, 
+                        ensuring a comprehensive record for better analysis and management." />
                     </Typography>
                 </Item>
             </Stack>

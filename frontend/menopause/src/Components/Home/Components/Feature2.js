@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -21,10 +23,11 @@ export default function Feature2() {
         <Grid item xs={6}>
           <Item>
             <Typography gutterBottom variant="h5" component="div">
-            Get Recommendations
+              <FormattedMessage id="home.feature2.title" defaultMessage="Get Recommendations" />
             </Typography>
             <Typography variant="body2" color="text.secondary">
-            Personalized recommendations tailored to your symptoms to help alleviate discomfort.
+              <FormattedMessage id="home.feature2.description" 
+              defaultMessage="Personalized recommendations tailored to your symptoms to help alleviate discomfort." />
             </Typography>
         </Item>
         </Grid>

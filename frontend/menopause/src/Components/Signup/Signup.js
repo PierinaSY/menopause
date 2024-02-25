@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -124,7 +125,7 @@ const Signup = () => {
                 <AppRegistrationIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign up
+                <FormattedMessage id="signup.title" defaultMessage="Sign up" />
               </Typography>
               <Box
                 component="form"
@@ -140,7 +141,7 @@ const Signup = () => {
                       required
                       fullWidth
                       id="first_name"
-                      label="First Name"
+                      label={<FormattedMessage id="signup.firstName" defaultMessage="First Name" />}
                       autoFocus
                       onChange={handleChange}
                     />
@@ -150,7 +151,7 @@ const Signup = () => {
                       required
                       fullWidth
                       id="last_name"
-                      label="Last Name"
+                      label={<FormattedMessage id="signup.lastName" defaultMessage="Last Name" />}
                       name="last_name"
                       autoComplete="family-name"
                       onChange={handleChange}
@@ -161,7 +162,7 @@ const Signup = () => {
                       required
                       fullWidth
                       id="email"
-                      label="Email Address"
+                      label={<FormattedMessage id="signup.email" defaultMessage="Email" />}
                       name="email"
                       autoComplete="email"
                       onChange={handleChange}
@@ -172,7 +173,7 @@ const Signup = () => {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label={<FormattedMessage id="signup.password" defaultMessage="Password" />}
                       type="password"
                       id="password"
                       autoComplete="new-password"
@@ -184,7 +185,11 @@ const Signup = () => {
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
-                      label="I want to receive inspiration, marketing promotions and updates via email."
+                      label={<FormattedMessage
+                          id="signup.checkboxLabel"
+                          defaultMessage="I want to receive inspiration, marketing promotions and updates via email."
+                        />
+                      }
                     />
                   </Grid>
                 </Grid>
@@ -194,12 +199,12 @@ const Signup = () => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign Up
+                  <FormattedMessage id="signup.signupButton" defaultMessage="Sign Up" />
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
                     <Link href="/signin" variant="body2">
-                      Already have an account? Sign in
+                      {<FormattedMessage id="signup.signin" defaultMessage="Already have an account? Sign in" />}
                     </Link>
                   </Grid>
                 </Grid>

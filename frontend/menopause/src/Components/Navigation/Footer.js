@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -47,7 +49,7 @@ function Footer() {
           </Grid>
           <Grid item xs={12} md={4}>
             <Typography variant="body1">
-              Empowering Women Through Menopause – Track, Understand, and Thrive
+              <FormattedMessage id="footer.tagline" defaultMessage="Empowering Women Through Menopause – Track, Understand, and Thrive" /> 
             </Typography>
           </Grid>
           <Grid item xs={12} md={4}>

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -34,21 +36,21 @@ function Hero(){
         <Grid item xs={10} md={6}>
           <Box sx={{ textAlign: 'center', p: 3 }}>
             <Typography variant="h5" color="inherit" paragraph>
-                    Track, Understand, and Thrive
+              <FormattedMessage id="home.hero.title" defaultMessage="Track, Understand, and Thrive" />
             </Typography>
             <Typography variant="h2" color="inherit" gutterBottom
                 sx={{
                     paddingBlockEnd: 5,
                 }}
             >
-              Empowering Women Through Menopause
+              <FormattedMessage id="home.hero.subtitle" defaultMessage="Empowering Women Through Menopause" />
             </Typography>
             
             <Button color="primary" variant="contained" href="/signup" sx={{ mx: 1 }}>
-              Start Today
+              <FormattedMessage id="home.hero.button1" defaultMessage="Start Today" />
             </Button>
             <Button color="secondary" variant="contained">
-             Learn More
+              <FormattedMessage id="home.hero.button2" defaultMessage="Learn More" />
             </Button>
           </Box>
         </Grid>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,8 +20,8 @@ import axios from "axios";
 
 const theme = createTheme();
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken'; 
+axios.defaults.xsrfHeaderName = 'X-Csrftoken';
 axios.defaults.withCredentials = true;
 
 const client = axios.create({
@@ -49,7 +50,16 @@ const Signin = () => {
       const response = await client.post("/api/login", {
         email: formData.email,
         password: formData.password,
-      });
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": "es-Sp", 
+          "X-CSRFToken": axios.defaults.xsrfCookieName,
+        },
+      }
+      );
+      
 
       if (response.status === 200) {
         // Successfully logged in
@@ -110,7 +120,7 @@ const Signin = () => {
                 <LockOpenOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                <FormattedMessage id="signin.title" defaultMessage="Sign in" /> 
               </Typography>
               <Box component="form" noValidate onSubmit={submitLogin} sx={{ mt: 1 }}>
                 <TextField
@@ -118,7 +128,7 @@ const Signin = () => {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label={<FormattedMessage id="signin.email" defaultMessage="Email" />}
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -130,7 +140,7 @@ const Signin = () => {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label={<FormattedMessage id="signin.password" defaultMessage="Password" />}
                     type="password"
                     id="password"
                     autoComplete="current-password"
@@ -139,7 +149,7 @@ const Signin = () => {
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  label={<FormattedMessage id="signin.remember" defaultMessage="Remember me" />}
                 />
                 <Button
                   type="submit"
@@ -147,11 +157,11 @@ const Signin = () => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  <FormattedMessage id="signin.button" defaultMessage="Sign in" />
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2"> Forgot password?</Link>
+                    <Link href="#" variant="body2"> <FormattedMessage id="signin.reset" defaultMessage="Forgot password?" /></Link>
                   </Grid>
                 </Grid>
             </Box>
