@@ -10,17 +10,6 @@ import uuid
 
 User = get_user_model()
 
-# class Profile(models.Model):
-#     #added a profile_id to get a better identification method
-#     id = models.IntegerField(primary_key=True)
-#     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-#     birthdate = models.DateField()
-#     menopause = models.BooleanField(default=False)
-#     last_period = models.DateField()
-#     daily_reminders = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return self.user_id.username
     
 class Symptom(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -82,3 +71,33 @@ class Report(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now)
     file = models.FileField(upload_to='reports')
+
+class Profile(models.Model):
+    #added a profile_id to get a better identification method
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthdate = models.DateField()
+    menopause = models.BooleanField(default=False)
+    last_period = models.DateField()
+    daily_reminders = models.BooleanField(default=False)
+    current_treatments = models.TextField()
+
+    def __str__(self):
+        return self.user_id.first_name
+    
+class BaseSymptoms(models.Model):
+    id = models.AutoField(primary_key=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
+    starting_date = models.DateField()
+
+    class Severity(models.IntegerChoices):
+        NONE = 0, _('None')
+        A_LITTLE = 1, _('A Little')
+        QUITE_A_LOT = 2, _('Quite A Lot')
+        EXTREME = 3, _('Extreme')
+    
+    severity = models.IntegerField(choices=Severity.choices, default= Severity.NONE)
+
+    def __str__(self):
+        return self.id

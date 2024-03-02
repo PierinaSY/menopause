@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FormattedMessage } from "react-intl";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -12,12 +14,6 @@ import axios from "axios";
 
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
-
-// const axiosConfig = {
-//   headers: {
-//     'X-CSRFToken': csrfToken,
-//   },
-// };
 
 const axiosInstance = axios.create({
   headers: {
@@ -46,9 +42,6 @@ export default function Add(props) {
     const fetchData = async () => {
       try {
         const [symptomsResponse, severityResponse, moodResponse] = await Promise.all([
-          // axios.get("http://127.0.0.1:8000/api/get_symptoms/"),
-          // axios.get("http://127.0.0.1:8000/api/get_severity_levels/"),
-          // axios.get("http://127.0.0.1:8000/api/get_mood_levels/"),
           axiosInstance.get("http://127.0.0.1:8000/api/get_symptoms/"),
           axiosInstance.get("http://127.0.0.1:8000/api/get_severity_levels/"),
           axiosInstance.get("http://127.0.0.1:8000/api/get_mood_levels/"),
@@ -90,7 +83,6 @@ export default function Add(props) {
         date: formattedDate,
       });
 
-      // Optionally, you can reset the form or perform other actions upon success
       console.log("Symptom added successfully");
       // Reset the form
       setFormData({
@@ -118,10 +110,10 @@ export default function Add(props) {
       }}
     >
       <Typography variant="h2" gutterBottom>
-        Track your symptoms
+        <FormattedMessage id="add.title" defaultMessage="Track your symptoms" />
       </Typography>
       <Typography variant="h4" gutterBottom>
-        What are you feeling today?
+        <FormattedMessage id="add.subtitle" defaultMessage="What are you feeling today?" />
       </Typography>
       <Stack spacing={2} sx={{ width: "50%", textAlign: "center" }}>
         <Box
@@ -138,7 +130,7 @@ export default function Add(props) {
               id="outlined-select-symptom-native"
               name="symptom_id"
               select
-              label="Choose a symptom"
+              label={<FormattedMessage id="add.symptom" defaultMessage="Choose a symptom" />}
               SelectProps={{
                 native: true,
               }}
@@ -156,7 +148,7 @@ export default function Add(props) {
               id="outlined-select-severity-native"
               name="severity"
               select
-              label="How bad is it?"
+              label={<FormattedMessage id="add.severity" defaultMessage="How bad is it?" />}
               defaultValue="EUR"
               SelectProps={{
                 native: true,
@@ -174,7 +166,7 @@ export default function Add(props) {
               id="outlined-select-mood-native"
               name="mood"
               select
-              label="How are you feeling because of it?"
+              label={<FormattedMessage id="add.mood" defaultMessage="How does this symptom make you feel?" />}
               defaultValue="EUR"
               SelectProps={{
                 native: true,
@@ -191,7 +183,7 @@ export default function Add(props) {
             <TextField
               id="outlined-number"
               name="duration"
-              label="How long does this symptom last?"
+              label={<FormattedMessage id="add.duration" defaultMessage="How long did this symptom last? Please express it in minutes" />}
               type="number"
               InputLabelProps={{
                 shrink: true,
@@ -201,7 +193,7 @@ export default function Add(props) {
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                label="Just to make sure, choose when did you feel this"
+                label={<FormattedMessage id="add.date" defaultMessage="Just to be sure, choose when did you feel this?" />}
                 value={formData.date}
                 onChange={handleDateChange}
               />
@@ -209,7 +201,7 @@ export default function Add(props) {
             <TextField
               id="outlined-multiline-static"
               name="notes"
-              label="Any notes you want to add?"
+              label={<FormattedMessage id="add.date" defaultMessage="Any comments you want to add?" />}
               multiline
               rows={4}
               value={formData.notes}
@@ -217,7 +209,7 @@ export default function Add(props) {
             />
           </div>
           <Button type="submit" variant="contained">
-            Add Symptom
+            <FormattedMessage id="add.submit" defaultMessage="Add Symptom" />
           </Button>
         </Box>
       </Stack>

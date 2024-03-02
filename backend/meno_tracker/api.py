@@ -267,3 +267,24 @@ class RecommendationsAPIView(APIView):
         }
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+class ProfileDetails(mixins.CreateModelMixin, 
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin, 
+                     mixins.DestroyModelMixin, 
+                     generics.GenericAPIView): 
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
