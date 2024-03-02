@@ -18,7 +18,6 @@ import Footer from "../Navigation/Footer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const theme = createTheme();
 
 axios.defaults.xsrfCookieName = 'csrftoken'; 
 axios.defaults.xsrfHeaderName = 'X-Csrftoken';
@@ -87,7 +86,6 @@ const Signin = () => {
   return (
     <div>
       <Navbar />
-      <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: "90vh" }}>
           <CssBaseline />
           <Grid item xs={false} sm={4} md={7}
@@ -168,7 +166,6 @@ const Signin = () => {
         </Box>
         </Grid>
         </Grid>
-      </ThemeProvider>
       <Footer />
     </div>
   );

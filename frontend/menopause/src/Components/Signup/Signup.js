@@ -21,7 +21,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const theme = createTheme();
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -83,7 +82,6 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: "90vh" }}>
           <CssBaseline />
           <Grid
@@ -212,7 +210,6 @@ const Signup = () => {
             </Box>
           </Grid>
         </Grid>
-      </ThemeProvider>
       <Footer />
     </div>
   );
