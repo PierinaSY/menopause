@@ -79,7 +79,9 @@
     "treatment.welcome": "Here are our top suggestions",
     "treatment.empty":"No symptom treatments found.",
     "metrics.welcome":"Let's see some reports",
-    "metrics.table":"Review all the symptoms you have registered"
+    "metrics.table":"Review all the symptoms you have registered",
+    "metrics.export":"Export to PDF"
+
 
 
 

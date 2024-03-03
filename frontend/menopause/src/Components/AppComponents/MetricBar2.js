@@ -47,3 +47,5 @@ export function BarChart2({ data }) {
   return <Bar options={options} data={chartData} />;
 }
 export default BarChart2;
+
+

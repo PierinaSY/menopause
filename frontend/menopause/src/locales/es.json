@@ -79,7 +79,8 @@
     "treatment.welcome": "Aquí están tus principales sugerencias",
     "treatment.empty":"No se encontraron síntomas ni tratamientos registrados.",
     "metrics.welcome":"Veamos algunos reportes",
-    "metrics.table":"Revisa todos los síntomas que has registrado"
+    "metrics.table":"Revisa todos los síntomas que has registrado",
+    "metrics.export":"Exportar a PDF"
 
 
 

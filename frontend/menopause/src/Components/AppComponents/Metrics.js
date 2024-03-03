@@ -14,6 +14,11 @@ import BarChart2 from './MetricBar2.js';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import html2canvas from 'html2canvas';
+
+
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
@@ -71,8 +76,45 @@ export default function Metrics(props) {
     fetchData();
   }, [props.userData.user_data.id]);
 
+  const handleDownloadPDF = async () => {
+    const pdf = new jsPDF();
+
+    const today = new Date();
+    const month = today.getMonth() + 1
+    const formattedDate = today.getDate() + "-" + month + "-" + today.getFullYear();
+
+    const file_title = "Reporte de Síntomas" + " - " + today
+    const file_subtitle = props.userData.user_data.first_name + " " + props.userData.user_data.last_name;
+    const file_footer = "Este reporte ha sido generado por Menopause App " + today.getFullYear();
+
+    const file_name = 
+    "symptoms_report_" + props.userData.user_data.first_name + "_" + formattedDate + ".pdf";
+
+    // Add content to the PDF
+    pdf.setFont("helvetica");
+    pdf.setFontSize(12);
+    pdf.text(file_title, 20, 10);
+    pdf.text(file_subtitle, 20, 20);
+
+    // Capture image using html2canvas
+    const componentContainer = document.getElementById('metricsContainer');
+    const canvas = await html2canvas(componentContainer);
+    const imgData = canvas.toDataURL('image/png');
+
+    // Add the image to the PDF
+    pdf.addImage(imgData, 'PNG', 20, 30, 160, 120); // Adjust the coordinates and size as needed
+
+    pdf.setFontSize(8);
+    pdf.text(file_footer, 20, 280);
+    // Save the PDF
+    pdf.save(file_name);
+  };
+
+  
+
   return (
     <Box
+      id="metricsContainer"
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -100,9 +142,13 @@ export default function Metrics(props) {
           <Typography variant='h6'>
             <FormattedMessage id="metrics.table" defaultMessage="Review all the symptoms you have registered" />
           </Typography>
-          <MetricTable columns={columm_name} data={tableData}/>
+          <MetricTable id="symptomtable" columns={columm_name} data={tableData}/>
         </Grid>
+        
       </Grid>
+      <Button variant="contained" color="primary" onClick={handleDownloadPDF}>
+        <FormattedMessage id="metrics.export" defaultMessage="Export to PDF" />
+      </Button>
     </Box>
   );
 }

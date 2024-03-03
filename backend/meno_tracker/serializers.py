@@ -18,24 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#     user_id = UserSerializer()
-
-#     class Meta:
-#         model = Profile
-#         fields = ['user_id', 'birthdate', 'menopause', 'last_period', 'daily_reminders']
-    
-#     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-
-
-#     def create(self, validated_data):
-#         user_data = self.initial_data.get('user_id')
-#         user_model = User(**{**validated_data,
-#                              'user_id': User.objects.get(pk=user_data['id'])
-#                              })
-#         user_model.save()
-#         return user_model
-    
 
 class SymptomSerializer(serializers.ModelSerializer):
     class Meta:

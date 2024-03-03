@@ -147,6 +147,27 @@ class ReportList(generics.ListAPIView):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
 
+class ReportDetails(mixins.CreateModelMixin, 
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin, 
+                     mixins.DestroyModelMixin, 
+                     generics.GenericAPIView): 
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
 
 #Choices for add symptoms 
 class GetSymptoms(generics.ListAPIView):
@@ -315,12 +336,9 @@ class BaseSymptomsDetails(mixins.CreateModelMixin,
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
     
-# class GetProfileID(generics.ListAPIView):
-#     def get(self, request, user_id):
-#         profile_id = get_object_or_404(Profile, user_id=user_id)
-#         return JsonResponse(profile_id,safe=False)
+
 class GetProfileID(RetrieveAPIView):
-    queryset = Profile.objects.all()  # Adjust the queryset as needed
+    queryset = Profile.objects.all()  
 
     def retrieve(self, request, user_id, *args, **kwargs):
         profile = get_object_or_404(Profile, user_id=user_id)
