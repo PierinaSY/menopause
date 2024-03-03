@@ -21,6 +21,11 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.db.models import Count, Func, F, Value, DateField
 
+from django.shortcuts import get_object_or_404
+from rest_framework.generics import RetrieveAPIView
+
+
+
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -288,3 +293,35 @@ class ProfileDetails(mixins.CreateModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+class BaseSymptomsDetails(mixins.CreateModelMixin, 
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin, 
+                     mixins.DestroyModelMixin, 
+                     generics.GenericAPIView): 
+    queryset = BaseSymptoms.objects.all()
+    serializer_class = BaseSymptomSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+# class GetProfileID(generics.ListAPIView):
+#     def get(self, request, user_id):
+#         profile_id = get_object_or_404(Profile, user_id=user_id)
+#         return JsonResponse(profile_id,safe=False)
+class GetProfileID(RetrieveAPIView):
+    queryset = Profile.objects.all()  # Adjust the queryset as needed
+
+    def retrieve(self, request, user_id, *args, **kwargs):
+        profile = get_object_or_404(Profile, user_id=user_id)
+        return JsonResponse({'profile_id': profile.id}, safe=False)

@@ -143,10 +143,12 @@ class Track_Symptom_TreatmentSerializer(serializers.Serializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     user_id = UserSerializer()
+    id = serializers.UUIDField() 
 
     class Meta: 
         model = Profile
         fields = ['id', 'user_id', 'birthdate', 'menopause', 'last_period', 'daily_reminders', 'current_treatments']
+        read_only_fields = ['id']
     
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
@@ -162,3 +164,26 @@ class ProfileSerializer(serializers.ModelSerializer):
             current_treatments=validated_data.get('current_treatments')
         )
         return profile
+    
+class BaseSymptomSerializer(serializers.ModelSerializer):
+    profile_id = ProfileSerializer()
+    symptom_id = SymptomSerializer()
+
+    class Meta: 
+        model = BaseSymptoms
+        fields = ['id', 'profile_id', 'symptom_id', 'severity', 'starting_date']
+    
+    symptom_id = serializers.PrimaryKeyRelatedField(queryset=Symptom.objects.all())
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
+
+    def create(self, validated_data):
+        profile_id = validated_data.get('profile_id')
+        symptom_id = validated_data.get('symptom_id')
+        
+        base_symptom = BaseSymptoms.objects.create(
+            profile_id=profile_id,
+            symptom_id=symptom_id,
+            severity=validated_data.get('severity'),
+            starting_date=validated_data.get('starting_date'),
+        )
+        return base_symptom

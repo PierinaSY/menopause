@@ -83,12 +83,16 @@ class Profile(models.Model):
     current_treatments = models.TextField()
 
     def __str__(self):
-        return self.user_id.first_name
+    
+        return str(self.id)
+    
+    def get_id_as_uuid(self):
+        return self.id
     
 class BaseSymptoms(models.Model):
     id = models.AutoField(primary_key=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
+    profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    symptom_id = models.ForeignKey(Symptom, on_delete=models.CASCADE)
     starting_date = models.DateField()
 
     class Severity(models.IntegerChoices):
@@ -100,4 +104,4 @@ class BaseSymptoms(models.Model):
     severity = models.IntegerField(choices=Severity.choices, default= Severity.NONE)
 
     def __str__(self):
-        return self.id
+        return str(self.id) + "-" + self.symptom_id.name + "-" + self.profile_id.user_id.first_name

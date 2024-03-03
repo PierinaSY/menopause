@@ -49,7 +49,41 @@
     "main.title":"Let’s get started",
     "main.button0":"Record your symptoms",
     "main.button1":"Get recommendations",
-    "main.button2":"See patterns on your journey"
+    "main.button2":"See patterns on your journey", 
+    "add.title":"Track your symptoms", 
+    "add.subtitle":"What are you feeling today?",
+    "add.symptom": "Choose a symptom", 
+    "add.severity": "How bad is it?", 
+    "add.mood": "How does this symptom make you feel?",
+    "add.duration": "How long did this symptom last? Please express it in minutes",
+    "add.date": "Just to be sure, choose when did you feel this?",
+    "add.notes": "Any comments you want to add?",
+    "add.submit":"Add Symptom",
+    "add.alert": "Your symptom was successfully recorded",
+    "base.title":"Now, let's record your more common symptoms",
+    "base.subtitle": "The goal of the Menopause app is to let you track your symptoms on a daily basis. However, we are aware that your symptoms most likely didn't start today, so we suggest your record your most common symptoms up until this point to have a base as a reference",
+    "base.symptom":"Choose a symptom", 
+    "base.severity":"How bad is it?",
+    "base.date":"When did it started?",
+    "base.submit": "Add Base Symptom",
+    "base.alert":"Your base symptom was successfully recorded",
+    "profile.title":"Let's get to know you a bit better",
+    "profile.subtitle":"Please complete your profile", 
+    "profile.birthdate": "When is your birth date?",
+    "add.menopause": "Are you menopausal?",
+    "profile.last_period": "When was your last period?", 
+    "profile.daily_reminders": "Do you want us to send you daily reminders to log your symptoms?", 
+    "profile.treatments": "Are you currently following any treatment? If so, please list all of them",
+    "profile.submit":"Save Profile",
+    "profile.alert": "Your profile was successfully recorded", 
+    "treatment.welcome": "Here are our top suggestions",
+    "treatment.empty":"No symptom treatments found.",
+    "metrics.welcome":"Let's see some reports",
+    "metrics.table":"Review all the symptoms you have registered"
+
+
+
+
 
 
 

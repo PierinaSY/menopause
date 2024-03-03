@@ -26,35 +26,43 @@ const axiosInstance = axios.create({
 const userData = JSON.parse(sessionStorage.getItem('user'));
 
 
-export default function Add(props) {
+export default function Base(props) {
   const [symptoms, setSymptoms] = useState([]);
   const [severity, setSeverity] = useState([]);
-  const [mood, setMood] = useState([]);
   const [formData, setFormData] = useState({
     symptom_id: "",
     severity: "",
-    mood: "",
-    duration: "",
-    date: dayjs(),
-    notes: "",
+    starting_date: dayjs(),
   });
 
   const [success, setSuccess] = useState(false);
 
+  const userId = props.user_id
+
+  const getUserProfileId = async (userId) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/get_profile_id/${userId}`);
+      console.log(response.data.profile_id)
+      return response.data.profile_id;
+    } catch (error) {
+      console.error('Error retrieving profile ID:', error);
+      throw error;
+    }
+  };
+
 
   useEffect(() => {
-    // Fetch symptoms, severity levels, and mood levels from Django backend using Axios
+    // Fetch symptoms and severity levels from Django backend using Axios
     const fetchData = async () => {
       try {
-        const [symptomsResponse, severityResponse, moodResponse] = await Promise.all([
+        const [symptomsResponse, severityResponse] = await Promise.all([
           axiosInstance.get("http://127.0.0.1:8000/api/get_symptoms/"),
           axiosInstance.get("http://127.0.0.1:8000/api/get_severity_levels/"),
-          axiosInstance.get("http://127.0.0.1:8000/api/get_mood_levels/"),
         ]);
 
         setSymptoms(symptomsResponse.data);
         setSeverity(severityResponse.data);
-        setMood(moodResponse.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -77,18 +85,19 @@ export default function Add(props) {
     e.preventDefault();
     console.log("Form Data:", formData);
     console.log({props})
-    const formattedDate = dayjs(formData.date).format("YYYY-MM-DD");
+    const formattedStartingDate = dayjs(formData.starting_date).format("YYYY-MM-DD");
 
 
     try {
+      const profileId = await getUserProfileId(userId);
       // Send data to Django backend to create a new record in Track_Symptom model
-      await axiosInstance.post("http://127.0.0.1:8000/api/track_symptom/9b460cc9-5f4e-443f-b104-122e38fad798", {
-        user_id: props.user_id,
+      await axiosInstance.post("http://127.0.0.1:8000/api/base_symptoms/7", {
+        profile_id: profileId,
         ...formData,
-        date: formattedDate,
+        starting_date: formattedStartingDate,
       });
 
-      console.log("Symptom added successfully");
+      console.log("Base Symptom added successfully");
 
       setSuccess(true);
 
@@ -96,13 +105,10 @@ export default function Add(props) {
       setFormData({
         symptom_id: "",
         severity: "",
-        mood: "",
-        duration: "",
-        date: dayjs(),
-        notes: "",
+        starting_date: dayjs(),
       });
     } catch (error) {
-      console.error("Error adding symptom:", error);
+      console.error("Error adding base symptom:", error);
       setSuccess(false);
 
     }
@@ -119,11 +125,13 @@ export default function Add(props) {
         gap: "1rem",
       }}
     >
-      <Typography variant="h2" gutterBottom>
-        <FormattedMessage id="add.title" defaultMessage="Track your symptoms" />
-      </Typography>
       <Typography variant="h4" gutterBottom>
-        <FormattedMessage id="add.subtitle" defaultMessage="What are you feeling today?" />
+        <FormattedMessage id="base.title" defaultMessage="Now, let's record your more common symptoms" />
+      </Typography>
+      <Typography variant="p" gutterBottom>
+        <FormattedMessage id="base.subtitle" 
+        defaultMessage=
+        "The goal of the Menopause app is to let you track your symptoms on a daily basis. However, we are aware that your symptoms most likely didn't start today, so we suggest your record your most common symptoms up until this point to have a base as a reference" />
       </Typography>
       <Stack spacing={2} sx={{ width: "50%", textAlign: "center" }}>
         <Box
@@ -140,7 +148,7 @@ export default function Add(props) {
               id="outlined-select-symptom-native"
               name="symptom_id"
               select
-              label={<FormattedMessage id="add.symptom" defaultMessage="Choose a symptom" />}
+              label={<FormattedMessage id="base.symptom" defaultMessage="Choose a symptom" />}
               SelectProps={{
                 native: true,
               }}
@@ -158,7 +166,7 @@ export default function Add(props) {
               id="outlined-select-severity-native"
               name="severity"
               select
-              label={<FormattedMessage id="add.severity" defaultMessage="How bad is it?" />}
+              label={<FormattedMessage id="base.severity" defaultMessage="How bad is it?" />}
               defaultValue="EUR"
               SelectProps={{
                 native: true,
@@ -172,61 +180,23 @@ export default function Add(props) {
                 </option>
               ))}
             </TextField>
-            <TextField
-              id="outlined-select-mood-native"
-              name="mood"
-              select
-              label={<FormattedMessage id="add.mood" defaultMessage="How does this symptom make you feel?" />}
-              defaultValue="EUR"
-              SelectProps={{
-                native: true,
-              }}
-              value={formData.mood}
-              onChange={handleInputChange}
-            >
-              {mood.map((option) => (
-                <option key={option[0]} value={option[0]}>
-                  {option[1]}
-                </option>
-              ))}
-            </TextField>
-            <TextField
-              id="outlined-number"
-              name="duration"
-              label={<FormattedMessage id="add.duration" defaultMessage="How long did this symptom last? Please express it in minutes" />}
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={formData.duration}
-              onChange={handleInputChange}
-            />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                label={<FormattedMessage id="add.date" defaultMessage="Just to be sure, choose when did you feel this?" />}
-                value={formData.date}
+                label={<FormattedMessage id="base.date" defaultMessage="When did it started?" />}
+                value={formData.starting_date}
                 onChange={handleDateChange}
               />
             </LocalizationProvider>
-            <TextField
-              id="outlined-multiline-static"
-              name="notes"
-              label={<FormattedMessage id="add.notes" defaultMessage="Any comments you want to add?" />}
-              multiline
-              rows={4}
-              value={formData.notes}
-              onChange={handleInputChange}
-            />
           </div>
           <Button type="submit" variant="contained">
-            <FormattedMessage id="add.submit" defaultMessage="Add Symptom" />
+            <FormattedMessage id="base.submit" defaultMessage="Add Base Symptom" />
           </Button>
         </Box>
       </Stack>
       {success && (
             <div>
                <Alert severity="success">
-                <FormattedMessage id="add.alert" defaultMessage="Your symptom was successfully recorded" />
+                <FormattedMessage id="base.alert" defaultMessage="Your base symptom was successfully recorded" />
                </Alert>
             </div>
        )}

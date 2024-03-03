@@ -49,7 +49,40 @@
     "main.title":"¡Empecemos con tu viaje!",
     "main.button0":"Registra tus síntomas",
     "main.button1":"Obtén recomendaciones",
-    "main.button2":"Identifica patrones en tu trayectoria"
+    "main.button2":"Identifica patrones en tu trayectoria",
+    "add.title":"Registra tus síntomas", 
+    "add.subtitle":"¿Qué sientes hoy?",
+    "add.symptom": "Elige un síntoma", 
+    "add.severity": "¿Cuán incómodo es?", 
+    "add.mood": "¿Cómo te hace sentir este síntoma?",
+    "add.duration": "¿Cuánto duró este síntoma? Por favor expresa la duración en minutos",
+    "add.date": "Sólo para segurarnos, ¿cuán experimentaste esté síntoma?",
+    "add.notes": "Si deseas agrega un comentario o nota",
+    "add.submit":"Agregar síntoma",
+    "add.alert": "Tu síntoma fue registrado correctamente",
+    "base.title":"Ahora, registremos tus síntomas más comunes",
+    "base.subtitle": "El objetivo de la aplicación es permitirte registrar tus síntomas diariamente. Sin embargo, entendemos que es muy probable que tus síntomas no empezaran hoy. Por ello, te sugerimos registar tus síntomas más comunes hasta la fecha para poder así tener una base de referencia.",
+    "base.symptom":"Elige un síntoma", 
+    "base.severity":"¿Cuán incómodo es?",
+    "base.date":"¿Cuándo empezó este síntoma?",
+    "base.submit": "Agregar síntoma",
+    "base.alert":"Tu síntoma de referencia base fue registrado correctamente",
+    "profile.title":"Ayúdanos a conocerte un poco mejor",
+    "profile.subtitle":"Por favor completa tu perfil", 
+    "profile.birthdate": "¿Cuál es tu fecha de nacimiento?",
+    "add.menopause": "¿Estás en la menopausia?",
+    "profile.last_period": "¿Cúando fue tu última regla?", 
+    "profile.daily_reminders": "¿Deseas recibir recordatorios diarios para registrar tus síntomas?", 
+    "profile.treatments": "Actualmente, ¿estás siguiendo algún tratamiento para la menopausia? Si es asi, por favor especifícalos",
+    "profile.submit":"Guardar Perfil",
+    "profile.alert": "Tu perfil ha sido guardado correctamente", 
+    "treatment.welcome": "Aquí están tus principales sugerencias",
+    "treatment.empty":"No se encontraron síntomas ni tratamientos registrados.",
+    "metrics.welcome":"Veamos algunos reportes",
+    "metrics.table":"Revisa todos los síntomas que has registrado"
+
+
+
 
 
 

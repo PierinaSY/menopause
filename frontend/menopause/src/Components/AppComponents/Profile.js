@@ -105,7 +105,7 @@ export default function Profile(props) {
         <FormattedMessage id="profile.title" defaultMessage="Let's get to know you a bit better" />
       </Typography>
       <Typography variant="h4" gutterBottom>
-        <FormattedMessage id="add.subtitle" defaultMessage="Please complete your profile" />
+        <FormattedMessage id="profile.subtitle" defaultMessage="Please complete your profile" />
       </Typography>
       <Stack spacing={2} sx={{ width: "50%", textAlign: "center" }}>
         <Box
@@ -179,7 +179,7 @@ export default function Profile(props) {
                 <FormattedMessage id="profile.alert" defaultMessage="Your profile was successfully recorded" />
                </Alert>
             </div>
-            )}
+       )}
     </Box>
   );
 }

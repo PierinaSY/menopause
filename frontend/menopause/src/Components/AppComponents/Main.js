@@ -55,7 +55,7 @@ export default function Main(props) {
           startIcon={<QueryStatsIcon />}
           component={Link}
           to="/patterns"
-        >
+          >
           <FormattedMessage id="main.button2" defaultMessage="See patterns on your journey" />
         </Button>
       </Stack>

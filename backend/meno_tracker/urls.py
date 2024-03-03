@@ -22,5 +22,7 @@ urlpatterns = [
     path('api/mood_date/', api.MoodByDateAPIView.as_view(), name='mood_date'),
     path('api/recommendations/', api.RecommendationsAPIView.as_view(), name='recommendations'),
     path("api/profile/<str:id>", api.ProfileDetails.as_view()),
+    path("api/base_symptoms/<int:id>", api.BaseSymptomsDetails.as_view()),
+    path('api/get_profile_id/<int:user_id>', api.GetProfileID.as_view(), name='get_profile_id')
 
 ]

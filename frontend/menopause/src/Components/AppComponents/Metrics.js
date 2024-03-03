@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -82,7 +84,7 @@ export default function Metrics(props) {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Let's see some reports
+        <FormattedMessage id="metrics.welcome" defaultMessage="Let's see some reports" />
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         <Grid item container spacing={2} justifyContent="center">
@@ -95,7 +97,9 @@ export default function Metrics(props) {
           </Grid>
         </Grid>
         <Grid item xs={12} justifyContent="center" container spacing={2} marginTop={4}>
-          <Typography variant='h6'>Review all the symptoms you have registered</Typography>
+          <Typography variant='h6'>
+            <FormattedMessage id="metrics.table" defaultMessage="Review all the symptoms you have registered" />
+          </Typography>
           <MetricTable columns={columm_name} data={tableData}/>
         </Grid>
       </Grid>

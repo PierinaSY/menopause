@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -20,7 +22,7 @@ export default function Treatment({ data }) {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Here are our top suggestions
+          <FormattedMessage id="treatment.welcome" defaultMessage="Here are our top suggestions" />
         </Typography>
 
         {data.symptom_treatments ? (
@@ -47,7 +49,7 @@ export default function Treatment({ data }) {
           ))
         ) : (
           <Typography variant="body1">
-            No symptom treatments found.
+            <FormattedMessage id="treatment.empty" defaultMessage="No symptom treatments found." />
           </Typography>
         )}
       </Box>

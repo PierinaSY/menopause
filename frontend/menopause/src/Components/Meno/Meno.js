@@ -3,6 +3,7 @@ import AppFooter from '../Navigation/AppFooter';
 import ResponsiveAppNavbar from '../Navigation/AppNavbar';
 import Main from '../AppComponents/Main';
 import Profile from '../AppComponents/Profile';
+import Base from '../AppComponents/BaseSymptoms';
 
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,11 @@ function Meno(props){
             <ResponsiveAppNavbar/>
             <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Main style={{ flex: 1 }} name= {userData.user_data.first_name} />
-                <Profile style={{ flex: 1 }} user_id= {userData.user_data.id} />
+                <div style={{ flex: 1 }}>
+                    <Profile user_id= {userData.user_data.id} />
+                    <Base user_id= {userData.user_data.id} />
+                </div>
+                
             </div>
             <AppFooter/>
         </div>
