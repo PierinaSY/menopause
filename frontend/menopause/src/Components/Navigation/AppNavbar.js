@@ -21,12 +21,13 @@ import axios from 'axios';
 
 const userData = JSON.parse(sessionStorage.getItem('user'));
 
+
 const settings = [
-                  <FormattedMessage id="navApp.item1" defaultMessage="Profile" />, 
-                  <FormattedMessage id="navApp.item2" defaultMessage="Dashboard" />, 
-                  <FormattedMessage id="navApp.item3" defaultMessage="Reports" />,
-                  <FormattedMessage id="navApp.item4" defaultMessage="Sign out" />
-                ];
+  { text: <FormattedMessage id="navApp.item1" defaultMessage="Profile" />, route: '/profile' },
+  { text: <FormattedMessage id="navApp.item2" defaultMessage="Dashboard" />, route: '/patterns' },
+  { text: <FormattedMessage id="navApp.item3" defaultMessage="Reports" />, route: '/reports' },
+  { text: <FormattedMessage id="navApp.item4" defaultMessage="Sign out" />, route: '/' }, // Redirect to home after sign-out
+];
 
 function ResponsiveAppNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -105,9 +106,11 @@ function ResponsiveAppNavbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, index) => (
-                <MenuItem key={index} onClick={() => (setting.props.id === 'navApp.item4' ? handleSignOut() : handleCloseUserMenu())}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
+                <MenuItem key={index} onClick={() => (setting.text.props.id === 'navApp.item4' ? handleSignOut() : handleCloseUserMenu())}>
+                  <Link to={setting.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Typography textAlign="center">{setting.text}</Typography>
+                  </Link>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
