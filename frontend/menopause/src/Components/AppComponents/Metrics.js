@@ -23,11 +23,17 @@ import autoTable from 'jspdf-autotable';
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
 
-const axiosConfig = {
+// const axiosConfig = {
+//   headers: {
+//     'X-CSRFToken': csrfToken,
+//   },
+// };
+
+const axiosInstance = axios.create({
   headers: {
     'X-CSRFToken': csrfToken,
   },
-};
+});
 
 export default function Metrics(props) {
 
@@ -35,6 +41,11 @@ export default function Metrics(props) {
   const [barData, setBarData] = useState([]);
   const [donutData, setDonutData] = useState([]);
   const [bar2Data, setBar2Data] = useState([]);
+
+  // const [formData, setFormData] = useState({
+  //   user_id: "",
+  //   file: "",
+  // });
 
 
   const columm_name = ['date', 'symptom_id__name', 'duration', 'notes'];
@@ -45,19 +56,19 @@ export default function Metrics(props) {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/recorded_symptoms/', {
           params: { user_id: props.userData.user_data.id },
-        }, axiosConfig);
+        }, axiosInstance);
 
         const barResponse = await axios.get('http://127.0.0.1:8000/api/count_symptoms_date/', {
            params: { user_id: props.userData.user_data.id },
-        }, axiosConfig);
+        }, axiosInstance);
 
         const donutResponse = await axios.get('http://127.0.0.1:8000/api/count_symptoms/', {
            params: { user_id: props.userData.user_data.id },
-        }, axiosConfig);
+        }, axiosInstance);
 
         const bar2Response = await axios.get('http://127.0.0.1:8000/api/mood_date/', {
            params: { user_id: props.userData.user_data.id },
-        }, axiosConfig);
+        }, axiosInstance);
         
         setBarData(barResponse.data);
         setTableData(response.data);
@@ -83,6 +94,9 @@ export default function Metrics(props) {
     const month = today.getMonth() + 1
     const formattedDate = today.getDate() + "-" + month + "-" + today.getFullYear();
 
+    const formatDate = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
+
     const file_title = "Reporte de Síntomas" + " - " + today
     const file_subtitle = props.userData.user_data.first_name + " " + props.userData.user_data.last_name;
     const file_footer = "Este reporte ha sido generado por Menopause App " + today.getFullYear();
@@ -102,15 +116,37 @@ export default function Metrics(props) {
     const imgData = canvas.toDataURL('image/png');
 
     // Add the image to the PDF
-    pdf.addImage(imgData, 'PNG', 20, 30, 160, 120); // Adjust the coordinates and size as needed
+    pdf.addImage(imgData, 'PNG', 20, 30, 160, 130); // Adjust the coordinates and size as needed
 
     pdf.setFontSize(8);
     pdf.text(file_footer, 20, 280);
     // Save the PDF
     pdf.save(file_name);
+
+    // Save the PDF
+    const pdfBlob = pdf.output('blob');
+
+    const formData = new FormData();
+    formData.append('file', pdfBlob, file_name);
+    formData.append('user_id', props.userData.user_data.id);
+    formData.append('date',formatDate);
+    
+
+    // Send the PDF file and user_id to your Django backend
+    try {
+      await axiosInstance.post('http://127.0.0.1:8000/api/report/830582d9-bfb5-495f-8bc4-9999993593a1', formData);
+
+
+      console.log('Report added successfully');
+      // console.log('Response:', response.data);
+
+    } catch (error) {
+
+      console.error('Error adding report:', error);
+    }
+
   };
 
-  
 
   return (
     <Box

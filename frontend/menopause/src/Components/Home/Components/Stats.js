@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from "react-intl";
+
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -27,7 +29,7 @@ export default function Stats() {
                 +40
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" component="div">
-                Recorded Symptoms
+              <FormattedMessage id="home.stats.1" defaultMessage="Recorded Symptoms" />
             </Typography>
           </Item>
         </Grid>
@@ -37,7 +39,7 @@ export default function Stats() {
                 +20
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" component="div">
-                Personalized Recommendations
+              <FormattedMessage id="home.stats.2" defaultMessage="Personalized Recommendations" />
             </Typography>
           </Item>
         </Grid>
@@ -47,7 +49,7 @@ export default function Stats() {
                 +100
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" component="div">
-                Registered Women
+              <FormattedMessage id="home.stats.3" defaultMessage="Registered Women" />
             </Typography>
           </Item>
         </Grid>
