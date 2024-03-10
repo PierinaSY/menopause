@@ -32,7 +32,7 @@ function Meno(props){
     return(
         <div>
             <ResponsiveAppNavbar/>
-            <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center'}}>
                 <Main style={{ flex: 1 }} name= {userData.user_data.first_name} />
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     {/* Conditionally render the Profile component */}
@@ -41,6 +41,7 @@ function Meno(props){
                     <Base user_id= {userData.user_data.id} />
                 </div>
             </div>
+            <AppFooter />
         </div>
     );
 }

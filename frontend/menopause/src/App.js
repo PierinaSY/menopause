@@ -18,6 +18,9 @@ import Track from './Components/Track-Symptoms/Track';
 import Recommendations from './Components/Recommendation/Recommendations';
 import Patterns from './Components/Patterns/Patterns';
 
+import ViewProfile from './Components/Profile/ViewProfile';
+import Reports from './Components/Reports/Reports';
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -40,6 +43,8 @@ function App() {
                 <Route path="/track" element={<Track />} />
                 <Route path="/recommendations" element={<Recommendations />} />
                 <Route path="/patterns" element={<Patterns />} />
+                <Route path="/profile" element={<ViewProfile />} />
+                <Route path="/reports" element={<Reports />} />
               </Routes>
             </div>
           </Router>

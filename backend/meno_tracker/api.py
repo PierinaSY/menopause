@@ -349,3 +349,11 @@ class UserProfileView(generics.RetrieveAPIView):
         profile = get_object_or_404(Profile, user_id=user_id)
         serializer = self.get_serializer(profile)
         return Response(serializer.data)
+    
+class UserReportListView(generics.ListAPIView):
+    serializer_class = ReportSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']  # Extract user_id from the URL
+        return Report.objects.filter(user_id=user_id)

@@ -74,7 +74,7 @@ function ResponsiveAppNavbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1 }}>         
-            <IconButton edge="start" color="inherit" aria-label="menu" href="/">
+            <IconButton edge="start" color="inherit" aria-label="menu" href="/meno">
                     <img src={logo} alt="Logo" height="50" />
             </IconButton>
             </Box>
@@ -86,7 +86,7 @@ function ResponsiveAppNavbar() {
             <span></span>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src="/broken-image.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
