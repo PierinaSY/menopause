@@ -4,12 +4,9 @@ from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 import uuid
 
-
-
 # Create your models here.
 
 User = get_user_model()
-
     
 class Symptom(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

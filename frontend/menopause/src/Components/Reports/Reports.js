@@ -6,17 +6,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import MetricTable from '../AppComponents/MetricTable';
-
-
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-
 const userData = JSON.parse(sessionStorage.getItem('user'));
-
 
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
@@ -29,7 +25,6 @@ const axiosConfig = {
 
 function Reports(){
 
-
     const [reportData, setReportData] = useState(null);
 
     const columm_name = ['id','date', 'file'];
@@ -37,9 +32,9 @@ function Reports(){
     useEffect(() => {
         const getUserReport = async (userId) => {
         try {
-           
             const reportResponse = await axios.get(`http://127.0.0.1:8000/api/user_reports/${userId}`);
             setReportData(reportResponse.data);
+
         } catch (error) {
             console.error("Error retrieving profile data:", error);
         }

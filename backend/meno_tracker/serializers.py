@@ -81,13 +81,8 @@ class ReportSerializer(serializers.ModelSerializer):
 
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
-# class CountBySymptomsSerializer(serializers.Serializer):
-#     # date = serializers.DateField()
-#     truncated_date = serializers.DateField()
-
-#     symptom_count = serializers.IntegerField()
 class CountBySymptomsSerializer(serializers.Serializer):
-    date = serializers.DateField()  # Assuming 'date' is already a datetime.date field
+    date = serializers.DateField()  
     symptom_count = serializers.IntegerField()
 
     def to_representation(self, instance):
@@ -96,17 +91,6 @@ class CountBySymptomsSerializer(serializers.Serializer):
             'symptom_count': instance['symptom_count'],
         }
     
-# class Track_Symptom_TreatmentSerializer(serializers.Serializer):
-#     track_symptom = Track_SymptomSerializer()
-#     symptom_treatment = serializers.SerializerMethodField()
-
-#     def get_symptom_treatment(self, obj):
-#         # Fetch Symptom_Treatment data related to the Track_Symptom instance
-#         symptom_treatment_data = Symptom_Treatment.objects.filter(symptom_id=obj.track_symptom.symptom.id)
-        
-#         # Serialize the data
-#         serializer = Symptom_TreatmentSerializer(symptom_treatment_data, many=True)
-#         return serializer.data
 
 class Track_Symptom_TreatmentSerializer(serializers.Serializer):
     track_symptom = Track_SymptomSerializer()
@@ -125,12 +109,10 @@ class Track_Symptom_TreatmentSerializer(serializers.Serializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     user_id = UserSerializer()
-    # id = serializers.UUIDField() 
 
     class Meta: 
         model = Profile
         fields = ['id', 'user_id', 'birthdate', 'menopause', 'last_period', 'daily_reminders', 'current_treatments']
-        # read_only_fields = ['id']
     
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 

@@ -22,12 +22,6 @@ import jsPDF from 'jspdf';
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
 
-// const axiosConfig = {
-//   headers: {
-//     'X-CSRFToken': csrfToken,
-//   },
-// };
-
 const axiosInstance = axios.create({
   headers: {
     'X-CSRFToken': csrfToken,
@@ -41,14 +35,7 @@ export default function Metrics(props) {
   const [donutData, setDonutData] = useState([]);
   const [bar2Data, setBar2Data] = useState([]);
 
-  // const [formData, setFormData] = useState({
-  //   user_id: "",
-  //   file: "",
-  // });
-
-
   const columm_name = ['date', 'symptom_id__name', 'duration', 'notes'];
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,14 +102,15 @@ export default function Metrics(props) {
     const imgData = canvas.toDataURL('image/png');
 
     // Add the image to the PDF
-    pdf.addImage(imgData, 'PNG', 20, 30, 160, 130); // Adjust the coordinates and size as needed
+    pdf.addImage(imgData, 'PNG', 20, 30, 160, 130); 
 
     pdf.setFontSize(8);
     pdf.text(file_footer, 20, 280);
+
     // Save the PDF
     pdf.save(file_name);
 
-    // Save the PDF
+    // Save the PDF in a variable
     const pdfBlob = pdf.output('blob');
 
     const formData = new FormData();
@@ -131,13 +119,11 @@ export default function Metrics(props) {
     formData.append('date',formatDate);
     
 
-    // Send the PDF file and user_id to your Django backend
+    // Send the PDF file and user_id to the backend
     try {
       await axiosInstance.post('http://127.0.0.1:8000/api/report/830582d9-bfb5-495f-8bc4-9999993593a1', formData);
 
-
       console.log('Report added successfully');
-      // console.log('Response:', response.data);
 
     } catch (error) {
 
@@ -155,9 +141,9 @@ export default function Metrics(props) {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh', // Change from height to minHeight
+        minHeight: '100vh', 
         gap: '1rem',
-        padding: '20px', // Add padding to create space around the content
+        padding: '20px', 
       }}
     >
       <Typography variant="h4" gutterBottom>

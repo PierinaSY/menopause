@@ -15,8 +15,6 @@ import Paper from "@mui/material/Paper";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Navigation/Footer";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +45,7 @@ const Signup = () => {
       );
 
       if (response.status === 201) {
-        // Successful signup, handle accordingly
+        // Successful signup
         console.log("User created successfully!");
         // // Log in the user after signup
         const loginResponse = await axios.post(
@@ -68,15 +66,13 @@ const Signup = () => {
           // Redirect to '/meno' and pass form data
           navigate("/meno");
         } else {
-          // Handle login failure
+          // Login failure
           console.error("Failed to log in after signup");
         }
       } else {
-        // Handle other response status codes or errors
         console.error("Failed to create user");
       }
     } catch (error) {
-      // Handle network errors or other issues
       console.error("Error creating user:", error);
     }
   };
@@ -121,7 +117,7 @@ const Signup = () => {
                 paddingRight: 10,
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+              <Avatar sx={{ m: 1, bgcolor: "primary.main", color:'secondary.main' }}>
                 <AppRegistrationIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -203,7 +199,7 @@ const Signup = () => {
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <Link href="/signin" variant="body2">
+                    <Link href="/signin" variant="body2" color={'secondary'}>
                       {<FormattedMessage id="signup.signin" defaultMessage="Already have an account? Sign in" />}
                     </Link>
                   </Grid>

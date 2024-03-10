@@ -29,7 +29,7 @@ const axiosConfig = {
 
 function ViewProfile(){
 
-    const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const getUserProfile = async (userId) => {

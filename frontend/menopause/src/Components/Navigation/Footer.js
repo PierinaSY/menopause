@@ -32,7 +32,7 @@ function Footer() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // Align center vertically
+        alignItems: 'center', 
         backgroundColor: '#474973',
         color: 'white',
         minHeight: '15vh',

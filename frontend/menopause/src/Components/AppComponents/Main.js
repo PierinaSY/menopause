@@ -36,9 +36,10 @@ export default function Main(props) {
       <Stack spacing={2} sx={{ width: "100%", textAlign: "center" }}>
         <Button
           variant="contained"
-          startIcon={<AddCircleIcon />}
+          startIcon={<AddCircleIcon/>}
           component={Link}
           to="/track"
+          sx={{color:'secondary.main'}}
         >
           <FormattedMessage id="main.button0" defaultMessage="Record your symptoms" />
         </Button>
@@ -47,6 +48,7 @@ export default function Main(props) {
           startIcon={<AssistantIcon />}
           component={Link}
           to="/recommendations"
+          sx={{color:'secondary.main'}}
         >
           <FormattedMessage id="main.button1" defaultMessage="Get recommendations" />
         </Button>
@@ -55,6 +57,7 @@ export default function Main(props) {
           startIcon={<QueryStatsIcon />}
           component={Link}
           to="/patterns"
+          sx={{color:'secondary.main'}}
           >
           <FormattedMessage id="main.button2" defaultMessage="See patterns on your journey" />
         </Button>

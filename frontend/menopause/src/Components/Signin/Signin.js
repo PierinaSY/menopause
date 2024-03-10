@@ -17,7 +17,6 @@ import Footer from "../Navigation/Footer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 axios.defaults.xsrfCookieName = 'csrftoken'; 
 axios.defaults.xsrfHeaderName = 'X-Csrftoken';
 axios.defaults.withCredentials = true;
@@ -67,12 +66,11 @@ const Signin = () => {
         const userData = response.data;
         sessionStorage.setItem('user', JSON.stringify(userData));
       } else {
-        // Handle login failure
+        // Login failure
         console.error("Failed to log in");
         return false;
       }
     } catch (error) {
-      // Handle network error or other issues
       console.error("Error logging in:", error);
       return false;
     }
@@ -113,7 +111,7 @@ const Signin = () => {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+              <Avatar sx={{ m: 1, bgcolor: "primary.main", color:'secondary.main' }}>
                 <LockOpenOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -158,7 +156,7 @@ const Signin = () => {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2"> <FormattedMessage id="signin.reset" defaultMessage="Forgot password?" /></Link>
+                    <Link href="#" variant="body2" color={'secondary'}> <FormattedMessage id="signin.reset" defaultMessage="Forgot password?" /></Link>
                   </Grid>
                 </Grid>
             </Box>

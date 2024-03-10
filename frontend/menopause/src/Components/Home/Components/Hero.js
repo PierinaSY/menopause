@@ -14,7 +14,7 @@ function Hero(){
         position: 'relative',
         background: 'rgb(252,252,252)',
         background: 'linear-gradient(15deg, rgba(252,252,252,1) 0%, rgba(234,247,207,1) 63%, rgba(235,239,191,1) 100%)',
-        width: '100vw', // Use full viewport width
+        width: '100vw', // Use full width
         minHeight:'60vh',
         display: 'flex',
         alignItems: 'center',
@@ -29,7 +29,7 @@ function Hero(){
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(10, 0, 0, 0.1)', // Adjust the opacity as needed
+          backgroundColor: 'rgba(10, 0, 0, 0.1)', 
         }}
       />
       <Grid container justifyContent="center" alignItems="center">

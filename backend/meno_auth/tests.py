@@ -29,7 +29,7 @@ class AppUserModelTest(TestCase):
         self.assertTrue(superuser.is_active)
 
     def test_create_superuser_invalid_flags(self):
-        # When a superuser is invalid an error must be thrown
+        # when a superuser is invalid an error is thrown
         with self.assertRaises(ValueError):
             get_user_model().objects.create_superuser(
                 email=self.user_data['email'],

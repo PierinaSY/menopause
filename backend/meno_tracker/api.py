@@ -245,43 +245,34 @@ class RecommendationsAPIView(APIView):
     def get(self, request, *args, **kwargs):
         user_id = self.request.user.id
 
-        # Retrieve Track_Symptom data based on user_id
         track_symptoms = Track_Symptom.objects.filter(user_id=user_id)
 
-        # Create a dictionary to hold the serialized Symptom_Treatment data
         symptom_treatment_data_dict = {}
 
-        # Loop through each Track_Symptom instance and get the associated Symptom_Treatment data
         for track_symptom in track_symptoms:
             symptom_id = track_symptom.symptom_id_id
 
-            # Check if the symptom ID is not already in the dictionary
+            # Check if the symptom ID is not already there
             if symptom_id not in symptom_treatment_data_dict:
-                # Retrieve Symptom instance
-                symptom_data = Symptom.objects.get(id=symptom_id)
 
-                # Retrieve associated Symptom_Treatment instances
+                symptom_data = Symptom.objects.get(id=symptom_id)
                 symptom_treatment_data = Symptom_Treatment.objects.filter(symptom_id=symptom_id)
 
-                # Serialize Symptom and Symptom_Treatment data
                 symptom_serializer = SymptomSerializer(symptom_data)
                 symptom_treatment_serializer = Symptom_TreatmentSerializer(symptom_treatment_data, many=True)
 
-                # Retrieve unique treatment IDs for each symptom
                 unique_treatment_ids = symptom_treatment_data.values('treatment_id_id').distinct()
 
-                # Retrieve treatment names and descriptions
                 treatments_data = Treatment.objects.filter(id__in=unique_treatment_ids)
                 treatments_serializer = TreatmentSerializer(treatments_data, many=True)
 
-                # Add the serialized data to the dictionary
+                # Add data
                 symptom_treatment_data_dict[symptom_id] = {
                     'symptom': symptom_serializer.data,
                     'treatments': treatments_serializer.data,
                     'symptom_treatments': symptom_treatment_serializer.data,
                 }
 
-        # Combine the data into a response
         response_data = {
             'symptom_treatments': list(symptom_treatment_data_dict.values()),
         }
@@ -343,9 +334,7 @@ class UserProfileView(generics.RetrieveAPIView):
     serializer_class = ProfileSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        # Get the user_id from the URL parameters
         user_id = self.kwargs['user_id']
-        # Query the Profile model based on user_id
         profile = get_object_or_404(Profile, user_id=user_id)
         serializer = self.get_serializer(profile)
         return Response(serializer.data)
@@ -355,5 +344,5 @@ class UserReportListView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user_id = self.kwargs['user_id']  # Extract user_id from the URL
+        user_id = self.kwargs['user_id']  
         return Report.objects.filter(user_id=user_id)

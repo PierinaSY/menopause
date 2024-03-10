@@ -10,9 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-
 const userData = JSON.parse(sessionStorage.getItem('user'));
-
 
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
@@ -23,11 +21,9 @@ const axiosConfig = {
   },
 };
 
-
 function Recommendation(){
 
     const [recommendationData, setRecommendationData] = useState([]);
-   
   
     useEffect(() => {
       const fetchData = async () => {
@@ -35,12 +31,9 @@ function Recommendation(){
           const response = await axios.get('http://127.0.0.1:8000/api/recommendations/', {
             params: { user_id: userData.user_data.id },
           }, axiosConfig);
-  
-         
+
           setRecommendationData(response.data);
-  
           console.log('This is the data', response.data);
-          
   
         } catch (error) {
           console.error('Error fetching data:', error);

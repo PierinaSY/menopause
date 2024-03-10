@@ -1,5 +1,3 @@
-# from django.shortcuts import render
-# Create your views here.
 from django.contrib.auth import get_user_model, login, logout
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
@@ -9,6 +7,7 @@ from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerial
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
 
+# Create your views here.
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
@@ -25,7 +24,7 @@ class UserRegister(APIView):
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
 	authentication_classes = (SessionAuthentication,)
-	##
+	
 	def post(self, request):
 		data = request.data
 		assert validate_email(data)
@@ -40,7 +39,6 @@ class UserLogin(APIView):
                 'email': user.email,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                # Include other user attributes as needed
             }
 			request.session['user_data'] = user_data
 			return JsonResponse({'message': 'Login successful', 'user_data': user_data})
@@ -58,7 +56,7 @@ class UserLogout(APIView):
 class UserView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	authentication_classes = (SessionAuthentication,)
-	##
+	
 	def get(self, request):
 		serializer = UserSerializer(request.user)
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)

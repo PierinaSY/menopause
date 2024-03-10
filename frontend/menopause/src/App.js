@@ -26,7 +26,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 
-
 function App() {
   return (
     <IntlProvider locale="es" messages={localeData.es}>

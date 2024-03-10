@@ -53,18 +53,14 @@ function ResponsiveAppNavbar() {
 
   const handleSignOut = async () => {
     try {
-      // Call the Django logout endpoint
       await axios.post("http://127.0.0.1:8000/api/logout");
-
-      // Clear user data from local storage (or session storage)
       sessionStorage.removeItem('user');
-
-      // Redirect to the home page
       history('/');
+
     } catch (error) {
       console.error('Error signing out:', error);
+
     } finally {
-      // Close the user menu
       handleCloseUserMenu();
     }
   };
