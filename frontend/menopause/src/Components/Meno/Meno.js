@@ -4,12 +4,13 @@ import ResponsiveAppNavbar from '../Navigation/AppNavbar';
 import Main from '../AppComponents/Main';
 import Profile from '../AppComponents/Profile';
 import Base from '../AppComponents/BaseSymptoms';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import { useEffect }  from 'react';
+import { useEffect, useState }  from 'react';
 
 
 const userData = JSON.parse(sessionStorage.getItem('user'));
@@ -31,15 +32,15 @@ function Meno(props){
     return(
         <div>
             <ResponsiveAppNavbar/>
-            <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ padding: '20px', flex: 1, display: 'flex', justifyContent: 'center' }}>
                 <Main style={{ flex: 1 }} name= {userData.user_data.first_name} />
-                <div style={{ flex: 1 }}>
-                    <Profile user_id= {userData.user_data.id} />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    {/* Conditionally render the Profile component */}
+                    {/* {!hasProfile && <Profile user_id={userData.user_data.id} />} */}
+                    <Profile user_id={userData.user_data.id} />
                     <Base user_id= {userData.user_data.id} />
                 </div>
-                
             </div>
-            <AppFooter/>
         </div>
     );
 }

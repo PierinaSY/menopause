@@ -12,7 +12,6 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Navigation/Footer";
 import { useNavigate } from "react-router-dom";

@@ -6,14 +6,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 class AppUserManager(BaseUserManager):
-    """
-    Custom user model manager where email is the unique identifiers
-    for authentication instead of usernames.
-    """
+    # Custom User model that uses emails for username
+
     def create_user(self, email, password, **extra_fields):
-        """
-        Create and save a user with the given email and password.
-        """
+        
+        # Create and save a user with email and password.
+        
         if not email:
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
@@ -23,9 +21,9 @@ class AppUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-        """
-        Create and save a SuperUser with the given email and password.
-        """
+        
+        # Create and save a SuperUser with an email and password.
+    
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)

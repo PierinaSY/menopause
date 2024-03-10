@@ -74,11 +74,12 @@ export default function Profile(props) {
 
     try {
       // Send data to Django backend to create a new record in Profile model
-      await axiosInstance.post("http://127.0.0.1:8000/api/profile/008bf635-659a-4671-b620-8a28a5d762c6", {
+      await axiosInstance.post("http://127.0.0.1:8000/api/profile/163d0dbe-931a-43cc-b44c-62a2616ad686", {
         user_id: props.user_id,
         ...formData,
         birthdate: formattedBirthDate,
         last_period:formattedLastPeriod,
+        
       });
 
       console.log("Profile added successfully");
@@ -101,10 +102,10 @@ export default function Profile(props) {
         gap: "1rem",
       }}
     >
-      <Typography variant="h2" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         <FormattedMessage id="profile.title" defaultMessage="Let's get to know you a bit better" />
       </Typography>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h6" gutterBottom>
         <FormattedMessage id="profile.subtitle" defaultMessage="Please complete your profile" />
       </Typography>
       <Stack spacing={2} sx={{ width: "50%", textAlign: "center" }}>

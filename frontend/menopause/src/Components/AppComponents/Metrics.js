@@ -18,7 +18,6 @@ import html2canvas from 'html2canvas';
 
 
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 
 const csrfTokenMatch = document.cookie.match(/csrftoken=(\w+)/);
 const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;

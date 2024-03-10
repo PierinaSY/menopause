@@ -61,7 +61,9 @@ const Signup = () => {
         if (loginResponse.status === 200) {
           // Successful login
           console.log("User logged in successfully!", loginResponse.data);
-          const userData = formData.data;
+          // const userData = formData.data;
+          const userData = response.data;
+
           sessionStorage.setItem('user', JSON.stringify(userData));
           // Redirect to '/meno' and pass form data
           navigate("/meno");

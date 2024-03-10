@@ -25,8 +25,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework.generics import RetrieveAPIView
 
 
-
-
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -196,10 +194,6 @@ class RecordedSymptomsAPIView(APIView):
         data = Track_Symptom.objects.filter(user_id=user_id).select_related('symptom_id').values('id', 'duration', 'date', 'notes', 'symptom_id__id', 'symptom_id__name')
         return Response(data)
 
-# class TruncDate(Func):
-#     function = 'DATE_TRUNC'
-#     template = '%(function)s(\'day\', %(expressions)s)'
-#     output_field = models.DateTimeField()
 
 class CountByDateAPIView(APIView):
     authentication_classes = [SessionAuthentication]
@@ -343,3 +337,15 @@ class GetProfileID(RetrieveAPIView):
     def retrieve(self, request, user_id, *args, **kwargs):
         profile = get_object_or_404(Profile, user_id=user_id)
         return JsonResponse({'profile_id': profile.id}, safe=False)
+
+class UserProfileView(generics.RetrieveAPIView):
+    
+    serializer_class = ProfileSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        # Get the user_id from the URL parameters
+        user_id = self.kwargs['user_id']
+        # Query the Profile model based on user_id
+        profile = get_object_or_404(Profile, user_id=user_id)
+        serializer = self.get_serializer(profile)
+        return Response(serializer.data)

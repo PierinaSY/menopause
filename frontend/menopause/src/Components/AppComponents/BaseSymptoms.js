@@ -119,10 +119,11 @@ export default function Base(props) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "top",
         alignItems: "center",
         height: "100vh",
         gap: "1rem",
+        paddingLeft: "2rem",
       }}
     >
       <Typography variant="h4" gutterBottom>

@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/recommendations/', api.RecommendationsAPIView.as_view(), name='recommendations'),
     path("api/profile/<str:id>", api.ProfileDetails.as_view()),
     path("api/base_symptoms/<int:id>", api.BaseSymptomsDetails.as_view()),
-    path('api/get_profile_id/<int:user_id>', api.GetProfileID.as_view(), name='get_profile_id')
+    path('api/get_profile_id/<int:user_id>', api.GetProfileID.as_view(), name='get_profile_id'),
+    path('api/profile/<int:user_id>/', api.UserProfileView.as_view(), name='user-profile')
 
 ]
